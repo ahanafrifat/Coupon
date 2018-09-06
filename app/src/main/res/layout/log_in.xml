@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:src="@drawable/rectangle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="32dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_round_corner"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_person_24dp"
+            android:fontFamily="@font/ubuntu"
+            android:hint="E-mail"
+            android:paddingBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:textSize="14sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_round_corner"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_lock_outline_black_24dp"
+            android:fontFamily="@font/ubuntu"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</FrameLayout>

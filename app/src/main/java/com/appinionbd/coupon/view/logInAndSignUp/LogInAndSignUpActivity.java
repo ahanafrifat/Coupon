@@ -1,29 +1,30 @@
 package com.appinionbd.coupon.view.logInAndSignUp;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appinionbd.coupon.R;
-import com.easyandroidanimations.library.FlipHorizontalAnimation;
-import com.easyandroidanimations.library.FlipHorizontalToAnimation;
-import com.easyandroidanimations.library.ParallelAnimator;
-import com.easyandroidanimations.library.ParallelAnimatorListener;
-import com.easyandroidanimations.library.ScaleInAnimation;
 
 import es.dmoral.toasty.Toasty;
 
 public class LogInAndSignUpActivity extends AppCompatActivity {
 
-    private CardView signUpCardView;
-    private CardView loginCardView;
     private TextView textViewSignUp, textViewLogin;
+
+    private TextView textViewForgetPassword;
+
+    private AnimatorSet mSetRightOut;
+    private AnimatorSet mSetLeftIn;
+
+    private View frameLayoutLogIn;
+    private View frameLayoutSignUp;
 
     private EditText editTextSignUpReTypePassword;
     private EditText editTextLogInReTypePassword;
@@ -40,13 +41,19 @@ public class LogInAndSignUpActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        signUpCardView = findViewById(R.id.cardView_sign_up);
-        loginCardView = findViewById(R.id.cardView_login);
+
         textViewSignUp = findViewById(R.id.textView_sign_up);
         textViewLogin = findViewById(R.id.textView_log_in);
 
-        editTextSignUpReTypePassword = findViewById(R.id.editText_sign_up_re_type_password);
-        editTextLogInReTypePassword = findViewById(R.id.editText_log_in_re_type_password);
+        textViewForgetPassword = findViewById(R.id.textView_forget_password);
+
+        mSetRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.out_animation);
+        mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.in_animation);
+
+        frameLayoutSignUp = findViewById(R.id.frameLayout_sign_up);
+        frameLayoutLogIn = findViewById(R.id.frameLayout__log_in);
+
+        changeCameraDistance();
 
         buttonLogInAndSignUp = findViewById(R.id.button_log_in_and_sign_up);
 
@@ -55,16 +62,19 @@ public class LogInAndSignUpActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(check == 0) {
-                        new FlipHorizontalToAnimation(loginCardView).setFlipToView(signUpCardView)
-                                .setInterpolator(new LinearInterpolator()).animate();
+//                        new FlipHorizontalToAnimation(loginCardView).setFlipToView(signUpCardView)
+//                                .setInterpolator(new LinearInterpolator()).animate();
 
-                        signUpCardView.setCardElevation(8);
-                        loginCardView.setElevation(0);
+                        frameLayoutSignUp.setVisibility(View.VISIBLE);
+                        flipCard(frameLayoutLogIn , frameLayoutSignUp);
+
                         check = 1;
-                        editTextSignUpReTypePassword.setVisibility(View.VISIBLE);
-                        editTextLogInReTypePassword.setVisibility(View.VISIBLE);
+
                         textViewSignUp.setTextColor(getResources().getColor(R.color.white));
                         textViewLogin.setTextColor(getResources().getColor(R.color.white_shade));
+
+                        textViewForgetPassword.setVisibility(View.GONE);
+
                         buttonLogInAndSignUp.setText("SIGN UP");
                     }
                     else
@@ -77,16 +87,15 @@ public class LogInAndSignUpActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(check == 1) {
-                        new FlipHorizontalToAnimation(signUpCardView).setFlipToView(loginCardView)
-                                .setInterpolator(new LinearInterpolator()).animate();
-                        new FlipHorizontalToAnimation(signUpCardView);
-                        signUpCardView.setCardElevation(0);
-                        loginCardView.setElevation(8);
+//                        new FlipHorizontalToAnimation(signUpCardView).setFlipToView(loginCardView)
+//                                .setInterpolator(new LinearInterpolator()).animate();
+//                        new FlipHorizontalToAnimation(signUpCardView);
 
+                        flipCard(frameLayoutSignUp, frameLayoutLogIn);
                         check = 0;
 
-                        editTextSignUpReTypePassword.setVisibility(View.GONE);
-                        editTextLogInReTypePassword.setVisibility(View.GONE);
+                        textViewForgetPassword.setVisibility(View.VISIBLE);
+
                         textViewSignUp.setTextColor(getResources().getColor(R.color.white_shade));
                         textViewLogin.setTextColor(getResources().getColor(R.color.white));
                         buttonLogInAndSignUp.setText("LOG IN");
@@ -96,6 +105,33 @@ public class LogInAndSignUpActivity extends AppCompatActivity {
                 }
             });
 
-        //CardView.LayoutParams layoutParams = ()
     }
+
+    private void changeCameraDistance() {
+        int distance = 8000;
+        float scale = getResources().getDisplayMetrics().density * distance;
+        frameLayoutLogIn.setCameraDistance(scale);
+        frameLayoutSignUp.setCameraDistance(scale);
+    }
+
+    public void flipCard(View frameLayoutFrom, View frameLayoutTo) {
+            mSetRightOut.setTarget(frameLayoutFrom);
+            mSetLeftIn.setTarget(frameLayoutTo);
+            mSetRightOut.start();
+            mSetLeftIn.start();
+    }
+
+//    public void flipCard(int check, View frameLayoutFrom, View frameLayoutTo) {
+//        if (check == 0) {
+//            mSetRightOut.setTarget(this.frameLayoutLogIn);
+//            mSetLeftIn.setTarget(this.frameLayoutSignUp);
+//            mSetRightOut.start();
+//            mSetLeftIn.start();
+//        } else {
+//            mSetRightOut.setTarget(this.frameLayoutSignUp);
+//            mSetLeftIn.setTarget(this.frameLayoutLogIn);
+//            mSetRightOut.start();
+//            mSetLeftIn.start();
+//        }
+//    }
 }
