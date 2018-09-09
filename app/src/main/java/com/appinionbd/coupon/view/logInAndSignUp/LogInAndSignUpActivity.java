@@ -2,6 +2,7 @@ package com.appinionbd.coupon.view.logInAndSignUp;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.appinionbd.coupon.R;
 import com.appinionbd.coupon.interfaces.presenterInterface.ILogin;
 import com.appinionbd.coupon.presenter.LoginPresenter;
+import com.appinionbd.coupon.view.home.HomeActivity;
 
 import es.dmoral.toasty.Toasty;
 
@@ -102,6 +104,7 @@ public class LogInAndSignUpActivity extends AppCompatActivity implements ILogin.
                 @Override
                 public void onClick(View v) {
                     if(check == SIGNUP) {
+
 //                        new FlipHorizontalToAnimation(signUpCardView).setFlipToView(loginCardView)
 //                                .setInterpolator(new LinearInterpolator()).animate();
 //                        new FlipHorizontalToAnimation(signUpCardView);
@@ -119,6 +122,13 @@ public class LogInAndSignUpActivity extends AppCompatActivity implements ILogin.
                         Toasty.info(getApplicationContext() , "You are already in Log in page!" , Toast.LENGTH_SHORT , true).show();
                 }
             });
+
+        buttonLogInAndSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoHomeActivity();
+            }
+        });
 
     }
 
@@ -141,6 +151,11 @@ public class LogInAndSignUpActivity extends AppCompatActivity implements ILogin.
         mSetRightIn.setTarget(frameLayoutTo);
         mSetLeftOut.start();
         mSetRightIn.start();
+    }
+
+    private void gotoHomeActivity(){
+        Intent intent = new Intent(this , HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override

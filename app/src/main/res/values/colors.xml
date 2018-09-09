@@ -3,6 +3,8 @@
     <color name="colorPrimary">#FF2B4F</color>
     <color name="colorPrimaryDark">#FF2B4F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="appNameInHome">#FF2D55</color>
+    <color name="topicTitleColor">#2A2E43</color>
     <color name="white">#FFFFFF</color>
     <color name="ash">#7E818D</color>
     <color name="white_shade">#83fafafa</color>
