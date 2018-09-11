@@ -1,6 +1,7 @@
 package com.appinionbd.coupon.view.home.fragment;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 
 import com.appinionbd.coupon.R;
 import com.appinionbd.coupon.interfaces.homeFragmentInterface.IHomeFragmentOptionListInterface;
+import com.appinionbd.coupon.interfaces.homeFragmentInterface.IHomeFragmentOptionSubListInterface;
 import com.appinionbd.coupon.interfaces.presenterInterface.IHomeFragment;
 import com.appinionbd.coupon.model.tempModels.ListOptions;
 import com.appinionbd.coupon.model.tempModels.ListSubOptions;
@@ -85,13 +89,37 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
             recyclerViewHomeOptions.setLayoutManager(layoutManagerforOptions);
             recyclerViewHomeOptions.setHasFixedSize(true);
 
-            RecyclerAdapterHomeOptionsList recyclerAdapterHomeOptionsList = new RecyclerAdapterHomeOptionsList(listSubOptions);
+            RecyclerAdapterHomeOptionsList recyclerAdapterHomeOptionsList = new RecyclerAdapterHomeOptionsList(listSubOptions, new IHomeFragmentOptionSubListInterface() {
+                @Override
+                public void imageBlur(ImageView imageView) {
+                    applyBlur(imageView);
+                }
+            });
             recyclerViewHomeOptions.setAdapter(recyclerAdapterHomeOptionsList);
             recyclerViewHomeOptions.setHasFixedSize(true);
         }
         catch (Exception e){
+
             Log.d("HomeFragment" , e.getMessage());
         }
+    }
+
+    private void applyBlur(ImageView imageView) {
+        imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                imageView.getViewTreeObserver().removeOnPreDrawListener(this);
+                imageView.buildDrawingCache();
+
+                Bitmap bitmap = imageView.getDrawingCache();
+                blur(bitmap);
+                return true;
+            }
+        });
+    }
+
+    private void blur(Bitmap bitmap) {
+
     }
 
 

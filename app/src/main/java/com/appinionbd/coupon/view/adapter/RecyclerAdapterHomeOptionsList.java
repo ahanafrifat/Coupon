@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appinionbd.coupon.R;
+import com.appinionbd.coupon.interfaces.homeFragmentInterface.IHomeFragmentOptionSubListInterface;
 import com.appinionbd.coupon.model.tempModels.ListSubOptions;
 
 import java.util.List;
@@ -16,22 +18,27 @@ import java.util.List;
 public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<RecyclerAdapterHomeOptionsList.SubListViewHolder>{
 
     List<ListSubOptions> listSubOptions;
+    IHomeFragmentOptionSubListInterface iHomeFragmentOptionSubListInterface;
 
-    public RecyclerAdapterHomeOptionsList(List<ListSubOptions> listSubOptions) {
+    public RecyclerAdapterHomeOptionsList(List<ListSubOptions> listSubOptions, IHomeFragmentOptionSubListInterface iHomeFragmentOptionSubListInterface) {
         this.listSubOptions = listSubOptions;
+        this.iHomeFragmentOptionSubListInterface = iHomeFragmentOptionSubListInterface;
     }
 
     @NonNull
     @Override
     public SubListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_sub_options , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_home_sub_options, parent , false);
         return new SubListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubListViewHolder holder, int position) {
 
+        iHomeFragmentOptionSubListInterface.imageBlur(holder.imageViewSubList);
+
     }
+
 
     @Override
     public int getItemCount() {
