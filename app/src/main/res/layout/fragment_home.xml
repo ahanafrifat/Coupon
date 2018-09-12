@@ -7,54 +7,10 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView_icon_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_image"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/imageView_icon_black"
-                android:fontFamily="@font/open_sans_extrabold"
-                android:text="Coúponãpp"
-                android:textColor="@color/appNameInHome"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/imageView_search"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/imageView_search_more"
-                android:src="@drawable/ic_search_24dp" />
-
-            <ImageView
-                android:id="@+id/imageView_search_more"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_more" />
-
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_topic_title" />
-
-    </LinearLayout>
 </FrameLayout>

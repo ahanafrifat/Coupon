@@ -1,8 +1,6 @@
 package com.appinionbd.coupon.model.tempModels;
 
-import android.support.design.widget.Snackbar;
-
-public class ListSubOptions {
+public class CouponsSubList {
     private String id;
     private String  option_id;
     private String title;
@@ -10,10 +8,10 @@ public class ListSubOptions {
     private int image;
     private int favourite;
 
-    public ListSubOptions() {
+    public CouponsSubList() {
     }
 
-    public ListSubOptions(String id, String option_id, String title, String des, int image, int favourite) {
+    public CouponsSubList(String id, String option_id, String title, String des, int image, int favourite) {
         this.id = id;
         this.option_id = option_id;
         this.title = title;

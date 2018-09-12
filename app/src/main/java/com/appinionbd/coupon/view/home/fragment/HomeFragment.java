@@ -2,7 +2,13 @@ package com.appinionbd.coupon.view.home.fragment;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.renderscript.Allocation;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.appinionbd.coupon.R;
 import com.appinionbd.coupon.interfaces.homeFragmentInterface.IHomeFragmentOptionListInterface;
@@ -27,6 +34,8 @@ import com.appinionbd.coupon.view.adapter.RecyclerAdapterHomeOptionsList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.blurry.Blurry;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,10 +70,10 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
         listOptions.add(new ListOptions("2" , "Recommended for you"));
 
         listSubOptions = new ArrayList<>();
-        listSubOptions.add(new ListSubOptions("0" , "0" , "Sushi Place" , "Buy 1 Get 1 of any platter" , R.drawable.food_1));
-        listSubOptions.add(new ListSubOptions("1" , "0" , "Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_2));
-        listSubOptions.add(new ListSubOptions("2" , "0" , "Burger Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_3));
-        listSubOptions.add(new ListSubOptions("3" , "0" , "Pizza Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_4));
+        listSubOptions.add(new ListSubOptions("0" , "0" , "Sushi Place" , "Buy 1 Get 1 of any platter" , R.drawable.food_1 , 0));
+        listSubOptions.add(new ListSubOptions("1" , "0" , "Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_2 , 0));
+        listSubOptions.add(new ListSubOptions("2" , "0" , "Burger Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_3, 0));
+        listSubOptions.add(new ListSubOptions("3" , "0" , "Pizza Palace" , "Buy 1 Get 1 of any platter", R.drawable.food_4 , 0));
 
         recyclerViewHome = getActivity().findViewById(R.id.recyclerView_home);
 
@@ -91,11 +100,19 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
 
             RecyclerAdapterHomeOptionsList recyclerAdapterHomeOptionsList = new RecyclerAdapterHomeOptionsList(listSubOptions, new IHomeFragmentOptionSubListInterface() {
                 @Override
-                public void imageBlur(ImageView imageView) {
-                    applyBlur(imageView);
+                public void imageBlur(ImageView imageView, LinearLayout linearLayoutSubList) {
+                    applyBlur(imageView , linearLayoutSubList);
                 }
+
+                @Override
+                public void favouriteIconClick(int favourite) {
+
+                }
+
+
             });
             recyclerViewHomeOptions.setAdapter(recyclerAdapterHomeOptionsList);
+            recyclerAdapterHomeOptionsList.notifyDataSetChanged();
             recyclerViewHomeOptions.setHasFixedSize(true);
         }
         catch (Exception e){
@@ -104,23 +121,61 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
         }
     }
 
-    private void applyBlur(ImageView imageView) {
+
+
+    private void applyBlur(ImageView imageView, LinearLayout linearLayoutSubList) {
+
         imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 imageView.getViewTreeObserver().removeOnPreDrawListener(this);
                 imageView.buildDrawingCache();
-
                 Bitmap bitmap = imageView.getDrawingCache();
-                blur(bitmap);
-                return true;
+                blur(bitmap , linearLayoutSubList);
+                return false;
             }
         });
     }
 
-    private void blur(Bitmap bitmap) {
+    private void blur(Bitmap bkg, View view) {
+        long startMs = System.currentTimeMillis();
 
+        float radius = 25;
+
+        Bitmap overlay = Bitmap.createBitmap((int) (view.getMeasuredWidth()),
+                (int) (view.getMeasuredHeight()), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(overlay);
+
+        canvas.translate(-view.getLeft(), -view.getTop());
+        canvas.drawBitmap(bkg, 0, 0, null);
+
+        RenderScript rs = RenderScript.create(getActivity());
+
+        Allocation overlayAlloc = Allocation.createFromBitmap(
+                rs, overlay);
+
+        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(
+                rs, overlayAlloc.getElement());
+
+        blur.setInput(overlayAlloc);
+
+        blur.setRadius(radius);
+
+        blur.forEach(overlayAlloc);
+
+        overlayAlloc.copyTo(overlay);
+
+        view.setBackground(new BitmapDrawable(
+                getResources(), overlay));
+
+        rs.destroy();
+        Log.d("HomeFragment" , System.currentTimeMillis() - startMs + "ms");
     }
 
+    @Override
+    public String toString() {
+        return "RenderScript";
+    }
 
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView_coupons_topic_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N\A"
+        android:textColor="@color/topicTitleColor"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/textView_coupons_see_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_topic_title"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/roboto_bold"
+        android:text="See All"
+        android:textColor="@color/topicTitleColor"
+        android:textSize="12sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_coupons_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_topic_title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="48dp" />
+</RelativeLayout>

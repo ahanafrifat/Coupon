@@ -7,6 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".view.home.HomeActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView_icon_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView_icon_black"
+            android:fontFamily="@font/open_sans_extrabold"
+            android:text="Coúponãpp"
+            android:textColor="@color/appNameInHome"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imageView_search_more"
+            android:src="@drawable/ic_search_24dp" />
+
+        <ImageView
+            android:id="@+id/imageView_search_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_settings" />
+
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/frameLayout_home"
         android:layout_width="match_parent"
@@ -14,7 +54,7 @@
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
     </FrameLayout>
 

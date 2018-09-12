@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appinionbd.coupon.R;
@@ -35,7 +36,28 @@ public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<Recycl
     @Override
     public void onBindViewHolder(@NonNull SubListViewHolder holder, int position) {
 
-        iHomeFragmentOptionSubListInterface.imageBlur(holder.imageViewSubList);
+        iHomeFragmentOptionSubListInterface.imageBlur(holder.imageViewSubList , holder.linearLayoutSubList);
+
+        holder.textViewSubListTitle.setText(listSubOptions.get(position).getTitle());
+        holder.textViewSubListDes.setText(listSubOptions.get(position).getDes());
+
+        if(listSubOptions.get(position).getFavourite() == 0){
+            holder.imageViewFavourite.setImageResource(R.drawable.ic_favorite_border_24dp);
+        }
+        else if(listSubOptions.get(position).getFavourite() == 1){
+            holder.imageViewFavourite.setImageResource(R.drawable.ic_favorite_24dp);
+        }
+
+        holder.imageViewFavourite.setOnClickListener(v -> {
+            if(listSubOptions.get(position).getFavourite() == 0){
+                listSubOptions.get(position).setFavourite(1);
+                holder.imageViewFavourite.setImageResource(R.drawable.ic_favorite_24dp);
+            }
+            else if(listSubOptions.get(position).getFavourite() == 1){
+                listSubOptions.get(position).setFavourite(0);
+                holder.imageViewFavourite.setImageResource(R.drawable.ic_favorite_border_24dp);
+            }
+        });
 
     }
 
@@ -51,6 +73,7 @@ public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<Recycl
         TextView textViewSubListTitle;
         TextView textViewSubListDes;
         ImageView imageViewFavourite;
+        LinearLayout linearLayoutSubList;
 
         public SubListViewHolder(View itemView) {
             super(itemView);
@@ -58,6 +81,10 @@ public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<Recycl
             textViewSubListTitle = itemView.findViewById(R.id.textView_sub_list_title);
             textViewSubListDes = itemView.findViewById(R.id.textView_sub_list_des);
             imageViewFavourite = itemView.findViewById(R.id.imageView_favourite);
+
+            linearLayoutSubList = itemView.findViewById(R.id.linearLayout_sub_list);
+
+
         }
     }
 }
