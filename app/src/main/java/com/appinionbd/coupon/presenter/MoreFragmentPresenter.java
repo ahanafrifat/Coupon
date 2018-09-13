@@ -1,4 +1,14 @@
 package com.appinionbd.coupon.presenter;
 
-public class MoreFragmentPresenter {
+import com.appinionbd.coupon.interfaces.presenterInterface.IMore;
+
+public class MoreFragmentPresenter implements IMore.Presenter {
+    private IMore.View view;
+
+    public MoreFragmentPresenter() {
+    }
+
+    public MoreFragmentPresenter(IMore.View view) {
+        this.view = view;
+    }
 }

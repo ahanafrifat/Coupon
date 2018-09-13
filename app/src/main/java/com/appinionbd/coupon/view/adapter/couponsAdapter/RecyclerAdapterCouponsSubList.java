@@ -35,6 +35,7 @@ public class RecyclerAdapterCouponsSubList extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(@NonNull CouponsSubListViewHolder holder, int position) {
 
+        holder.imageViewCouponsSubList.setImageResource(couponsSubLists.get(position).getImage());
         iCouponsFragmentOptionSubListInterface.imageBlur(holder.imageViewCouponsSubList , holder.linearLayoutCouponsSubList);
 
         holder.textViewCouponsSubListTitle.setText(couponsSubLists.get(position).getTitle());

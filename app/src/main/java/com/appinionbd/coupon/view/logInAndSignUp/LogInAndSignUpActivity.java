@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.appinionbd.coupon.R;
 import com.appinionbd.coupon.interfaces.presenterInterface.ILogin;
 import com.appinionbd.coupon.presenter.LoginPresenter;
+import com.appinionbd.coupon.view.coupons.CouponsActivity;
 import com.appinionbd.coupon.view.home.HomeActivity;
 
 import es.dmoral.toasty.Toasty;
@@ -155,6 +156,7 @@ public class LogInAndSignUpActivity extends AppCompatActivity implements ILogin.
 
     private void gotoHomeActivity(){
         Intent intent = new Intent(this , HomeActivity.class);
+//        Intent intent = new Intent(this , CouponsActivity.class);
         startActivity(intent);
     }
 

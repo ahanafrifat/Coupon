@@ -38,6 +38,7 @@ public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<Recycl
 
         iHomeFragmentOptionSubListInterface.imageBlur(holder.imageViewSubList , holder.linearLayoutSubList);
 
+        holder.imageViewSubList.setImageResource(listSubOptions.get(position).getImage());
         holder.textViewSubListTitle.setText(listSubOptions.get(position).getTitle());
         holder.textViewSubListDes.setText(listSubOptions.get(position).getDes());
 
@@ -84,6 +85,10 @@ public class RecyclerAdapterHomeOptionsList extends  RecyclerView.Adapter<Recycl
 
             linearLayoutSubList = itemView.findViewById(R.id.linearLayout_sub_list);
 
+
+            linearLayoutSubList.setOnClickListener(v -> {
+                iHomeFragmentOptionSubListInterface.linearLayoutSubListClicked(listSubOptions.get(getLayoutPosition()));
+            });
 
         }
     }

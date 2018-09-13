@@ -34,8 +34,17 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/imageView_search_more"
+            android:layout_toStartOf="@+id/imageView_search_settings"
             android:src="@drawable/ic_search_24dp" />
+
+        <ImageView
+            android:id="@+id/imageView_search_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imageView_search_more"
+            android:src="@drawable/ic_settings" />
 
         <ImageView
             android:id="@+id/imageView_search_more"
@@ -43,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_settings" />
+            android:src="@drawable/ic_more_vert_blue_24dp" />
+
 
     </RelativeLayout>
 

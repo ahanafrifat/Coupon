@@ -109,6 +109,10 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
 
                 }
 
+                @Override
+                public void linearLayoutSubListClicked(ListSubOptions listSubOptions) {
+                    openIndividualCouponOfHome(listSubOptions);
+                }
 
             });
             recyclerViewHomeOptions.setAdapter(recyclerAdapterHomeOptionsList);
@@ -120,7 +124,6 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
             Log.d("HomeFragment" , e.getMessage());
         }
     }
-
 
 
     private void applyBlur(ImageView imageView, LinearLayout linearLayoutSubList) {
@@ -176,6 +179,10 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
     @Override
     public String toString() {
         return "RenderScript";
+    }
+
+    private void openIndividualCouponOfHome(ListSubOptions listSubOptions) {
+
     }
 
 }
