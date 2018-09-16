@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appinionbd.coupon.R;
@@ -26,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     final int FRAGMENT_GIFT_CARDS = 3;
     final int FRAGMENT_SHOPS = 4;
     final int FRAGMENT_MORE = 5;
+    private RelativeLayout relativeLayoutHomeActivity;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        relativeLayoutHomeActivity = findViewById(R.id.relativeLayout_home_activity);
     }
 
     @Override
@@ -75,22 +79,27 @@ public class HomeActivity extends AppCompatActivity {
         if (fragmentCheck == FRAGMENT_HOME)
         {
             fragment = new HomeFragment();
+            relativeLayoutHomeActivity.setVisibility(View.VISIBLE);
         }
         else if (fragmentCheck == FRAGMENT_COUPONS)
         {
             fragment = new CouponsFragment();
+            relativeLayoutHomeActivity.setVisibility(View.VISIBLE);
         }
         else if (fragmentCheck == FRAGMENT_GIFT_CARDS)
         {
             fragment = new GiftCardsFragment();
+            relativeLayoutHomeActivity.setVisibility(View.VISIBLE);
         }
         else if (fragmentCheck == FRAGMENT_SHOPS)
         {
             fragment = new ShopsFragment();
+            relativeLayoutHomeActivity.setVisibility(View.GONE);
         }
         else if (fragmentCheck == FRAGMENT_MORE)
         {
             fragment = new MoreFragment();
+            relativeLayoutHomeActivity.setVisibility(View.VISIBLE);
         }
 
         if(fragment != null){

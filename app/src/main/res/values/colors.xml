@@ -9,4 +9,7 @@
     <color name="ash">#7E818D</color>
     <color name="white_shade">#83fafafa</color>
     <color name="deep_yellow">#FFB900</color>
+    <color name="very_dark_gray">#2A2E43</color>
+    <color name="black">#000000</color>
+    <color name="search_background">#2A2E43</color>
 </resources>

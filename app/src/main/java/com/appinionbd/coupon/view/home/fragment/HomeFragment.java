@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements IHomeFragment.View {
 
     private void createSubListOfOptions(String optionId, RecyclerView recyclerViewHomeOptions) {
         try {
-            RecyclerView.LayoutManager layoutManagerforOptions = new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL , true );
+            RecyclerView.LayoutManager layoutManagerforOptions = new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL , false );
             recyclerViewHomeOptions.setLayoutManager(layoutManagerforOptions);
             recyclerViewHomeOptions.setHasFixedSize(true);
 
