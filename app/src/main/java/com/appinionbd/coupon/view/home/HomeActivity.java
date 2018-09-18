@@ -99,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         else if (fragmentCheck == FRAGMENT_MORE)
         {
             fragment = new MoreFragment();
-            relativeLayoutHomeActivity.setVisibility(View.VISIBLE);
+            relativeLayoutHomeActivity.setVisibility(View.GONE);
         }
 
         if(fragment != null){
